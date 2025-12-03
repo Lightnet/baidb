@@ -1,7 +1,5 @@
 // client.js
 import van from "https://cdn.jsdelivr.net/gh/vanjs-org/van/public/van-1.6.0.min.js";
-import useFetch from "./usefetch.js";
-
 const { div, ul, li, textarea, button, span, style } = van.tags;
 
 const messages = van.state([]);
@@ -12,52 +10,10 @@ const addMessage = (role, content) => {
     messages.val = [...messages.val, { role, content }];
 };
 
-async function getMessages(){
-    const data = await useFetch("/message",{method:'GET'});
-    console.log(data);
-    if(data){
-        if(data?.api){
-            console.log("API");
-            return;
-        }
-        console.log(typeof data);
-        // if()
-        if (Array.isArray(data)) {
-            console.log("Data is a JavaScript array.");
-            console.log(`Array length: ${data.length}`);
-            for(let i=0; i < data.length;i++){
-                addMessage(data[i].role, data[i].content);
-            }
-
-        }
-    }
-}
-
-// const getAIResponse = async (userMsg) => {
-//     isLoading.val = true;
-//     await new Promise(r => setTimeout(r, 1000 + Math.random() * 1000));
-//     addMessage("assistant", `I heard: "${userMsg}" — this is a simulated response!`);
-//     isLoading.val = false;
-// };
-
 const getAIResponse = async (userMsg) => {
     isLoading.val = true;
-    // await new Promise(r => setTimeout(r, 1000 + Math.random() * 1000));
-    await new Promise(r => setTimeout(r, 100 + Math.random() * 100));
-    const data = await useFetch("/message",{
-        method:'POST',
-        body:JSON.stringify({
-            content:userMsg
-        })
-    })
-    //get message data
-    if(data){
-        console.log(data)
-        if(data?.sessionId){
-            addMessage("assistant", data.content);
-        }
-    }
-    // addMessage("assistant", `I heard: "${userMsg}" — this is a simulated response!`);
+    await new Promise(r => setTimeout(r, 1000 + Math.random() * 1000));
+    addMessage("assistant", `I heard: "${userMsg}" — this is a simulated response!`);
     isLoading.val = false;
 };
 
@@ -147,5 +103,3 @@ let style_textContent = `
 van.add(document.head, style(style_textContent));
 
 van.add(document.body, ChatApp);
-
-getMessages();

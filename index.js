@@ -5,6 +5,7 @@ import { html } from '@elysiajs/html';
 import { staticPlugin } from '@elysiajs/static';
 import { cookie } from '@elysiajs/cookie';
 import van from "mini-van-plate/van-plate";
+import { TursoDB } from './turso_db.js';
 
 const {head, body, style, script} = van.tags
 
@@ -37,7 +38,10 @@ function scriptHtml02(_script){
   return pageHtml;
 }
 
+const db = new TursoDB();
+
 const app = new Elysia();
+app.decorate('db', db);
 app.use(cookie()) // Initialize the cookie plugin
 app.use(html())
 app.use(staticPlugin({
@@ -55,16 +59,47 @@ app.get('/test',({ html }) => html(
   scriptHtml02("test.js")
 ));
 
-console.log("process");
+
+app.get('/message', async({db }) => {
+  const history = await db.getMessages("chat-123");
+  console.log(history);
+  if(history){
+    return history;
+  }else{
+    return {api:"ERROR"};
+  }
+});
+
+app.post('/message', async({ body, db }) => {
+  console.log(body);
+  // console.log(db);
+  try {
+      await db.insertMessage({
+        sessionId: "chat-123",
+        role: "user",
+        content: body.content,
+      });
+
+      if(db){
+      return {
+        sessionId:"chat-123",
+        role:"assistant",
+        content:"It's sunny today!",
+        metadata: {  },
+      };
+    }  
+  } catch (error) {
+    return {api:"ERROR"};  
+  }
+});
+
+// console.log("process");
 // console.log(process);
-console.log(process.env.PORT)
-
-console.log("Bun");
+// console.log(process.env.PORT)
+// console.log("Bun");
 // console.log(Bun);
-console.log(Bun.env.PORT)
-
+// console.log(Bun.env.PORT)
 const port = Bun.env.PORT || 3000;
-
 app.listen(port);
 
 const localString = new Date().toLocaleString();
