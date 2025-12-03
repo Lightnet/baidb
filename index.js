@@ -5,7 +5,7 @@ import { html } from '@elysiajs/html';
 import { staticPlugin } from '@elysiajs/static';
 import { cookie } from '@elysiajs/cookie';
 import van from "mini-van-plate/van-plate";
-import { TursoDB } from './turso_db.js';
+import { TursoDB } from './src/turso_db.js';
 
 const {head, body, style, script} = van.tags
 

@@ -1,4 +1,4 @@
-// turso-db.js — FIXED & BULLETPROOF
+// turso_db.js
 
 import { connect } from "@tursodatabase/database";
 
