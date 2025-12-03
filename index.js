@@ -48,8 +48,13 @@ app.use(staticPlugin({
         // noCache: process.env.NODE_ENV !== 'production',
     }));
 app.get('/',({ html }) => html(
-  scriptHtml02("index.js")
+  scriptHtml02("client.js")
 ));
+
+app.get('/test',({ html }) => html(
+  scriptHtml02("test.js")
+));
+
 console.log("process");
 // console.log(process);
 console.log(process.env.PORT)
@@ -65,3 +70,4 @@ app.listen(port);
 const localString = new Date().toLocaleString();
 // console.log(localString); 
 console.log(`SERVER: http://127.0.0.1:${port} ` + localString);
+console.log(`SERVER: http://127.0.0.1:${port}/test`);

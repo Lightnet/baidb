@@ -1,5 +1,33 @@
 # baidb
 
+# License: MIT
+
+# Status:
+- Prototype
+
+# Program Language:
+- javascript
+
+# Program:
+- Bun https://github.com/oven-sh/bun
+
+# Packages:
+- elysia
+- @elysiajs/cookie
+- @elysiajs/html
+- @elysiajs/static
+- @tursodatabase/database
+- mini-van-plate
+- nanoid ( ??? )
+- uuid ( ??? )
+
+# Information:
+  Prototype create simple chat AI test.
+
+  Well wanted to create something simple, learn and experiment.
+
+# Install:
+
 To install dependencies:
 
 ```bash
