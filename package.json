@@ -1,0 +1,21 @@
+{
+  "name": "bunjs_ai_db",
+  "module": "index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "devb": "bun --watch index.js"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "dependencies": {
+    "@elysiajs/cookie": "^0.8.0",
+    "@elysiajs/html": "^1.4.0",
+    "@elysiajs/static": "^1.4.7",
+    "@tursodatabase/database": "^0.3.2",
+    "elysia": "^1.4.17",
+    "mini-van-plate": "^0.6.3",
+    "nanoid": "^5.1.6",
+    "uuid": "^13.0.0"
+  }
+}
